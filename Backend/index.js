@@ -16,7 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
 // router mounting...
-
+app.use('/api/user/auth',require('./router/user.router'))
+app.use('/api/user/profile',require('./router/userProfile.router'))
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
