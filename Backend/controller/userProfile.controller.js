@@ -29,7 +29,14 @@ exports.createProfile = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    const profile = await UserProfile.findOne({ user: req.user.id }).populate('user', 'name email role');
+    if(!req.user){
+        return res.status(401).json({
+            success : false,
+            message : "Unautheorize access"
+        })
+    }
+    const id = req.params.id;
+    const profile = await UserProfile.findOne({ user: id}).populate('user', 'name email role');
     if (!profile) {
       return res.status(404).json({ message: 'Profile not found' });
     }
@@ -42,12 +49,19 @@ exports.getProfile = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
+    if(!req.user){
+        return res.status(401).json({
+            success : false,
+            message : "Unautheorize access"
+        })
+    }
     const updates = req.body;
+    const id = req.params.id;
 
     const profile = await UserProfile.findOneAndUpdate(
-      { user: req.user.id },
+      { user: id },
       { $set: updates },
-      { new: true, runValidators: true }
+      { new: true}
     );
 
     if (!profile) {
@@ -63,7 +77,14 @@ exports.updateProfile = async (req, res) => {
 
 exports.deleteProfile = async (req, res) => {
   try {
-    const profile = await UserProfile.findOneAndDelete({ user: req.user.id });
+    if(!req.user){
+        return res.status(401).json({
+            success : false,
+            message : "Unautheorize access"
+        })
+    }
+    const id = req.params.id;
+    const profile = await UserProfile.findOneAndDelete({ user: id });
     if (!profile) {
       return res.status(404).json({ message: 'Profile not found' });
     }
