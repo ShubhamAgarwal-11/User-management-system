@@ -1,0 +1,1 @@
+export const USER_AUTH_ENDPOINT = 'http://localhost:8000/api/user/auth'

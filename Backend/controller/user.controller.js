@@ -1,7 +1,7 @@
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const sendEmail = require('../config/email');
+const sendEmail = require('../config/email.js')
 
 exports.register = async (req, res) => {
   try {
@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
     // Send OTP Email
     await sendEmail(email, 'Verify Your Email', `Your OTP is: ${otp}`);
 
-    res.status(201).json({ message: 'User registered. OTP sent to email for verification.' });
+    return res.status(201).json({ success : true , message: 'User registered. OTP sent to email for verification.' });
 
   } catch (err) {
     console.error('Registration Error:', err);
@@ -75,7 +75,7 @@ exports.verifyOTP = async (req, res) => {
     user.otpExpires = undefined;
     await user.save();
 
-    res.json({ message: 'Email verified successfully' });
+    res.json({success : true, message: 'Email verified successfully' });
 
   } catch (err) {
     console.error('OTP Verification Error:', err);
@@ -119,6 +119,7 @@ exports.login = async (req, res) => {
 
     // Send response with token
     return res.status(200).json({
+      success : true,
       message: 'Login successful',
       token,
       user: { id: user._id, name: user.name, email: user.email, role: user.role }
