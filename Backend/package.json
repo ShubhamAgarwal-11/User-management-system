@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "this is for Xcode assesment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShubhamAgarwal-11/User-management-system.git"
+  },
+  "author": "Shubham Agarwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShubhamAgarwal-11/User-management-system/issues"
+  },
+  "homepage": "https://github.com/ShubhamAgarwal-11/User-management-system#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.0"
+  }
+}

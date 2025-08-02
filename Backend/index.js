@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 require('./config/db')();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
+ 
 app.use(cookieParser());
 const corsOptions = {
     origin : true,
